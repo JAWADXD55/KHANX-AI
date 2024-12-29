@@ -1,35 +1,38 @@
-const {cmd , commands} = require('../command')
-
+const { cmd, commands } = require('../command');
+const config = require('../config');
+// repo info
 cmd({
     pattern: "repo",
-    alias: ["sc","script","info"],
-    desc: "sc the bot",
+    alias: ["sc", "script", "info"],
+    desc: "Info about the bot repository",
     category: "main",
     react: "👨‍💻",
     filename: __filename
-},
+}, 
+async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        let dec = `*Hello there KHAN-AI User! 👋🏻* 
 
-async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
-try{
+> Simple , Straight Forward But Loaded With Features 🎊, Meet KHAN-AI WhatsApp Bot.
 
-let dec = `*Hello there KHANX-AI User! 👋🏻* 
+*Thanks for using KHAN-AI 🚩* 
 
-> KHANX-Ai is a beta version of KHAN-AI also it provide enhanced functionality to users
+> Don't forget to frok the repo ⤵️
 
- *Thanks for using KHAN-MD 🇵🇰* 
+https://github.com/JawadYTX/KHAN-AI`;
 
-> Join WhatsApp Channel :- ⤵️
- 
-https://whatsapp.com/channel/0029VatOy2EAzNc2WcShQw1j
+        await conn.sendMessage(from, { image: { url: `https://files.catbox.moe/x3bdmi.jpg` }, caption: dec, contextInfo: { mentionedJid: [m.sender], forwardingScore: 999, isForwarded: true, forwardedNewsletterMessageInfo: { newsletterJid: '120363354023106228@newsletter', newsletterName: 'JawadTechX', serverMessageId: 143 } } }, { quoted: mek });
 
-Dont forget to give star to repo ⬇️
+        // Send audio
+        await conn.sendMessage(from, {
+            audio: { url: 'https://github.com/JawadYTX/KHAN-DATA/raw/refs/heads/main/autovoice/repo.m4a' },
+            mimetype: 'audio/mp4',
+            ptt: true
+        }, { quoted: mek });
+        
+    } catch (e) {
+        console.log(e);
+        reply(`${e}`);
+    }
+});
 
-https://github.com/JawadYTX/KHANX-AI`
-    
-await conn.sendMessage(from,{image:{url: `https://files.catbox.moe/hzagwo.jpg`},caption:dec},{quoted:mek});
-
-}catch(e){
-console.log(e)
-reply(`${e}`)
-}
-})
